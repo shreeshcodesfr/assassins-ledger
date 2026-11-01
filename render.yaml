@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: assassins-ledger
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    plan: free
+    envVars:
+      - key: TWELVE_DATA_API_KEY
+        sync: false

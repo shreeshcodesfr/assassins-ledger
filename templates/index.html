@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0a0b0c">
+  <title>ASSASSIN'S LEDGER — Leap of Faith</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="grain"></div>
+<section id="intro" class="intro-screen">
+  <div class="intro-top"><span>THE BROTHERHOOD PRESENTS</span><span>VOL. I — THE LEDGER</span></div>
+  <div class="intro-content">
+    <div class="eyebrow"><i></i> NOTHING IS TRUE. EVERYTHING IS TRACKED. <i></i></div>
+    <h1>ASSASSIN'S<br><em>LEDGER</em></h1>
+    <p class="intro-sub">A portfolio is a creed. Every position, every dividend, every move — recorded.</p>
+    <div class="leap-scene">
+      <div class="moon"></div><div class="bird bird-one">✦</div><div class="bird bird-two">✦</div>
+      <div class="cityline"></div><div class="leaper">✥</div>
+      <div class="leap-caption">LEAP OF FAITH <span>— INTO FINANCIAL CLARITY</span></div>
+    </div>
+    <div class="how-grid">
+      <div><b>01 / BUILD YOUR CREED</b><span>Add holdings from NSE, BSE, NASDAQ or NYSE with quantity and average cost.</span></div>
+      <div><b>02 / WATCH THE MARKETS</b><span>Refresh provider quotes, compare market value and track unrealised gains or losses.</span></div>
+      <div><b>03 / COLLECT YOUR REWARDS</b><span>Log dividends, review payment history and estimate your portfolio income.</span></div>
+    </div>
+    <button id="enterBtn" class="enter-btn"><span class="sigil-mini">✥</span> PRESS THE INSIGNIA TO ENTER <span>↗</span></button>
+    <div class="intro-foot">INDIA · UNITED STATES <span>◆</span> PRIVATE PORTFOLIO INTELLIGENCE</div>
+  </div>
+</section>
+
+<div id="appShell" class="app-shell hidden">
+  <aside class="sidebar">
+    <div class="brand"><button id="homeSigil" class="sigil" aria-label="Return to intro">✥</button><div><b>ASSASSIN'S</b><small>LEDGER / PORTFOLIO INTEL</small></div></div>
+    <div class="side-label">THE SANCTUARY</div>
+    <button class="nav active" data-view="overview">◈ <span>Overview</span></button>
+    <button class="nav" data-view="holdings">▤ <span>Holdings</span></button>
+    <button class="nav" data-view="dividends">✧ <span>Dividends</span></button>
+    <button class="nav" data-view="watchlist">⌖ <span>Market watch</span></button>
+    <div class="side-bottom"><div class="live-dot"></div><span id="connectionLabel">API connection pending</span><small>MARKET DATA / TWELVE DATA</small></div>
+  </aside>
+  <main class="main">
+    <header class="topbar">
+      <div><div class="crumb">THE BROTHERHOOD <span>/</span> <b id="viewTitle">OVERVIEW</b></div><h2 id="greeting">Your wealth, in the shadows.</h2></div>
+      <div class="top-actions"><span class="market-pill"><i></i> <span id="marketState">MARKET FEED</span></span><button class="icon-btn" id="refreshBtn" title="Refresh quotes">⟳</button><button class="gold-btn" id="addHoldingTop">+ ADD POSITION</button></div>
+    </header>
+
+    <section class="view active" id="overviewView">
+      <div class="hero-banner">
+        <div><div class="eyebrow">PORTFOLIO INTELLIGENCE / 001</div><h3>Fortune favours<br><em>the prepared.</em></h3><p>Know what you own. Know what it earns.</p></div>
+        <div class="hero-mark">✥</div><div class="hero-index">ANIMUS<br><b>SYNC 100%</b></div>
+      </div>
+      <div class="stat-grid">
+        <article class="stat-card"><label>TOTAL INVESTED</label><strong id="totalInvested">—</strong><small>ACROSS ALL POSITIONS</small></article>
+        <article class="stat-card featured"><label>MARKET VALUE</label><strong id="marketValue">—</strong><small id="valueSub">LIVE QUOTE REFRESH</small></article>
+        <article class="stat-card"><label>UNREALISED P/L</label><strong id="totalPL">—</strong><small id="plPercent">PRICE PERFORMANCE</small></article>
+        <article class="stat-card"><label>DIVIDENDS LOGGED</label><strong id="dividendTotal">—</strong><small>RECORDED CASH INCOME</small></article>
+      </div>
+      <div class="content-grid">
+        <section class="panel wide"><div class="panel-head"><div><label>YOUR POSITIONS</label><h3>Active holdings</h3></div><button class="text-btn" data-goto="holdings">VIEW ALL ↗</button></div><div id="overviewHoldings" class="table-wrap"></div></section>
+        <section class="panel"><div class="panel-head"><div><label>ASSET ALLOCATION</label><h3>Capital deployed</h3></div></div><div id="allocation" class="allocation"><div class="empty">Add holdings to reveal your allocation.</div></div></section>
+        <section class="panel"><div class="panel-head"><div><label>DIVIDEND INTELLIGENCE</label><h3>Income ledger</h3></div><button class="text-btn" data-goto="dividends">OPEN ↗</button></div><div id="dividendPreview" class="dividend-preview"></div></section>
+      </div>
+    </section>
+
+    <section class="view" id="holdingsView">
+      <div class="section-heading"><div><div class="eyebrow">THE ARMOURY / POSITIONS</div><h3>Every asset has a place.</h3></div><button class="gold-btn" id="addHoldingBtn">+ ADD HOLDING</button></div>
+      <div class="panel"><div class="panel-head"><div><label>PORTFOLIO REGISTER</label><h3>Holdings ledger</h3></div><span class="muted" id="holdingCount">0 POSITIONS</span></div><div id="holdingsTable" class="table-wrap"></div></div>
+    </section>
+
+    <section class="view" id="dividendsView">
+      <div class="section-heading"><div><div class="eyebrow">THE REWARDS / CASH FLOW</div><h3>Let your capital speak.</h3></div><button class="gold-btn" id="addDividendBtn">+ LOG DIVIDEND</button></div>
+      <div class="stat-grid two"><article class="stat-card featured"><label>TOTAL DIVIDENDS RECEIVED</label><strong id="dividendGrand">—</strong><small>MANUALLY RECORDED PAYMENTS</small></article><article class="stat-card"><label>PAYMENTS RECORDED</label><strong id="dividendCount">0</strong><small>INCOME EVENTS</small></article></div>
+      <div class="panel"><div class="panel-head"><div><label>PAYMENT HISTORY</label><h3>Dividend register</h3></div></div><div id="dividendsTable" class="table-wrap"></div></div>
+      <div class="panel provider-note"><b>PROVIDER DIVIDEND HISTORY</b><p>Historical corporate dividend events can be requested per holding. Availability and API credits depend on your Twelve Data subscription. The manual dividend register works independently.</p><div id="providerDividendArea"></div></div>
+    </section>
+
+    <section class="view" id="watchlistView">
+      <div class="section-heading"><div><div class="eyebrow">SCOUTING NETWORK / MARKET WATCH</div><h3>Eyes on the horizon.</h3></div><div class="market-filter"><button class="filter active" data-market="ALL">ALL</button><button class="filter" data-market="IN">INDIA</button><button class="filter" data-market="US">UNITED STATES</button></div></div>
+      <div class="watch-grid" id="watchGrid"></div>
+      <div class="panel provider-note"><b>DATA STATUS</b><p>Quotes refresh from Twelve Data when a valid API key and market entitlement are configured. This is provider-refreshed data, not guaranteed tick-by-tick streaming.</p><div id="watchStatus"></div></div>
+    </section>
+  </main>
+</div>
+
+<div class="modal-backdrop" id="holdingModal"><form class="modal" id="holdingForm"><button type="button" class="modal-close" data-close="holdingModal">×</button><div class="eyebrow">RECRUIT A NEW POSITION</div><h3>Add to the ledger</h3><div class="form-grid"><label>Market<select id="hMarket"><option value="IN">India</option><option value="US">United States</option></select></label><label>Exchange<select id="hExchange"><option>NSE</option><option>BSE</option></select></label><label class="full">Ticker symbol<input id="hSymbol" placeholder="RELIANCE or AAPL" required></label><label class="full">Company / asset name<input id="hName" placeholder="Optional display name"></label><label>Quantity<input id="hQty" type="number" min="0.000001" step="any" required></label><label>Average buy price<input id="hPrice" type="number" min="0.000001" step="any" required></label></div><p class="form-hint">Indian symbols are requested as SYMBOL:NSE or SYMBOL:BSE. US symbols use their ticker, e.g. AAPL.</p><button class="gold-btn full-btn">SAVE POSITION</button></form></div>
+<div class="modal-backdrop" id="dividendModal"><form class="modal" id="dividendForm"><button type="button" class="modal-close" data-close="dividendModal">×</button><div class="eyebrow">RECORD YOUR REWARD</div><h3>Log a dividend</h3><div class="form-grid"><label>Symbol<input id="dSymbol" placeholder="AAPL / RELIANCE" required></label><label>Currency<select id="dCurrency"><option>INR</option><option>USD</option></select></label><label>Dividend per share<input id="dAmount" type="number" min="0.000001" step="any" required></label><label>Shares eligible<input id="dShares" type="number" min="0.000001" step="any" required></label><label>Payment date<input id="dDate" type="date" required></label><label>Note<input id="dNote" placeholder="Quarterly payout"></label></div><p class="form-hint">Total received is calculated as dividend per share × eligible shares.</p><button class="gold-btn full-btn">RECORD PAYMENT</button></form></div>
+<div id="toast" class="toast"></div>
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body></html>
